@@ -5,6 +5,7 @@ source ./env.sh
 
 ### Create Static IP Address
 # https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address#reserve_new_static
+### Just for reference - the gateway YAML is hardcoding IP already
 
 gcloud compute addresses create cabral-gke-static-ip \
     --global \
@@ -32,4 +33,10 @@ gcloud compute ssl-certificates create cabral-gke-static-ip-cert \
 gcloud compute ssl-certificates list --project=${PROJECT_ID} 
 
 gcloud container clusters get-credentials ${CLUSTER_NAME} --region ${CLUSTER_REGION} --project ${PROJECT_ID}
+
+### Just for reference - the gateway YAML is hardcoding this certificate and domain/IP
 kubectl apply -f ./gateway.yaml
+kubectl apply -f ./keycloak.yaml
+
+
+### Create
